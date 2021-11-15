@@ -1,0 +1,108 @@
+<div class="d-flex flex-row bd-highlight mb-3">
+
+    <div class="form-froup row" style="">
+    
+        <label class="col-sm-2 col-form-label">Họ tên nhân viên</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" [(ngModel)]="hoten"
+            placeholder="Enter Name">
+        </div>
+    </div>
+    <br>
+    
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Mã nhân viên</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" [(ngModel)]="kyhieunv"
+            placeholder="Enter employee symbol">
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row" >
+    
+        <label class="col-sm-2 col-form-label">Cấp mật khẩu</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" [(ngModel)]="mk"
+            placeholder="Enter Name">
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Hồ sơ</label>
+        <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="hosonhanvien">
+
+                <ng-container *ngFor="let hsnvList of dshsnv">
+                    <option [ngValue]="hsnvList.id">{{hsnvList.kyhieunv}} </option>
+                </ng-container>
+        
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Trạng thái</label>
+        <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="trangthai">
+
+                <ng-container *ngFor="let trangthaiList of dstrangthai">
+                    <option [ngValue]="trangthaiList.id">{{trangthaiList.tentrangthai}} </option>
+                </ng-container>
+        
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Phòng ban</label>
+        <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="maphongban">
+
+                <ng-container *ngFor="let pbList of dsphongban">
+                    <option [ngValue]="pbList.id">{{pbList.ten}} </option>
+                </ng-container>
+        
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Chức vụ</label>
+        <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="machucvu">
+
+                <ng-container *ngFor="let cvList of dschucvu">
+                    <option [ngValue]="cvList.id">{{cvList.tenchucvu}} </option>
+                </ng-container>
+        
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Hệ số lương</label>
+        <div class="col-sm-10">
+            <select class="form-control" [(ngModel)]="mahesoluong">
+
+                <ng-container *ngFor="let hslList of dshsl">
+                    <option [ngValue]="hslList.id">{{hslList.ten}} </option>
+                </ng-container>
+        
+            </select>
+        </div>
+    </div>
+    <br>
+    <label class="col-sm-2 col-form-label">Hình ảnh</label>
+    <div class="ml-3 bd-highlight" style="">
+    <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+    </div>
+    </div>
+    <br>
+    
+    <button (click)="addNhanvien()" *ngIf="nha.id==0" class="btn btn-primary">
+        Add
+    </button>
+    
+    <button (click)="updateNhanvien()" *ngIf="nha.id!=0" class="btn btn-primary">
+        Update
+    </button>

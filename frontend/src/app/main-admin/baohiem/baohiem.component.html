@@ -1,0 +1,171 @@
+<section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Quản lý bảo hiểm</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row mb-1">
+                <div class="col-sm-7">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        data-backdrop="static" data-keyboard="false">
+                        Add
+                    </button>
+
+                </div>
+                <!-- <div class="col-md-2"> -->
+                <!-- <div class="form-group col-md-4">
+                        <strong>Tìm Kiếm </strong><input type="text" class="form-control" placeholder="Enter Keyword for filter result"
+                          [(ngModel)]="searchText">
+                      </div> -->
+                <!-- </div> -->
+                <div class="col-md-3">
+                    <div class="">
+                        <strong>Tìm Kiếm </strong><input type="text" class="form-control"
+                            placeholder="Enter Keyword for filter result" [(ngModel)]="searchText">
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">Mã NV</th>
+                            <th scope="col">Tên loại bảo hiểm</th>
+                            <th scope="col">Mức phí đóng bảo hiểm</th>
+                            <th scope="col">Ngày đóng</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i = index;let item of baohiems | paginate: { itemsPerPage: 10,
+                            currentPage: page,
+                             totalItems:totalLength } | filter:searchText">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{item.hoten}}</td>
+                            <td>{{item.kyhieunv}}</td>
+                            <td>{{item.tenbaohiem}}</td>
+                            <td style="color: red;">{{item.mucphi}}VND</td>
+                            <td>{{item.ngaytao| date:'longDate'}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                    data-target="#exampleModal1" (click)="onEdit(item.id)"><i
+                                        class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger" style="margin-left:5px;"
+                                    (click)="deleteClick(item)"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            Footer
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!-- /.box -->
+
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm bảo hiểm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Nhân viên:</label>
+
+                <select class="form-control" [(ngModel)]="idnhanvien">
+
+                    <ng-container *ngFor="let nvList of dsnv">
+                        <option [ngValue]="nvList.id">{{nvList.hoten}} </option>
+                    </ng-container>
+
+                </select>
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Tên bảo hiểm:</label>
+                <input type="text" class="form-control" [(ngModel)]="tenbaohiem" placeholder="nhập tên bảo hiểm">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Mức phí:</label>
+                <input type="number" class="form-control" [(ngModel)]="mucphi" placeholder="nhập mức phí">
+            </div>
+            <!-- <div class="modal-body">
+                <label for="exampleInputEmail1">Ngày đóng:</label>
+                <input type="date" class="form-control" [(ngModel)]="ngaytao" placeholder="nhập ngày đóng">
+            </div> -->
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="add()" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Nhân viên:</label>
+
+                    <select class="form-control" [(ngModel)]="idnhanvien">
+
+                        <ng-container *ngFor="let nvList of dsnv">
+                            <option [ngValue]="nvList.id">{{nvList.hoten}} </option>
+                        </ng-container>
+
+                    </select>
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Tên bảo hiểm:</label>
+                    <input type="text" class="form-control" [(ngModel)]="tenbaohiem">
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Mức phí:</label>
+                    <input type="number" class="form-control" [(ngModel)]="mucphi">
+                </div>
+                <!-- <div class="modal-body">
+                    <label for="exampleInputEmail1">Ngày đóng:</label>
+                    <input type="date" class="form-control" [(ngModel)]="ngaytao">
+                </div> -->
+
+
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

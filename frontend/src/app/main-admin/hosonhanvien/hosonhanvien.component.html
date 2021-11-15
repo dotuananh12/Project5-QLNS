@@ -1,0 +1,217 @@
+<section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Quản lý Hồ Sơ Nhân Viên</h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row mb-1">
+                <div class="col-sm-7">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        data-backdrop="static" data-keyboard="false">
+                        Add
+                    </button>
+
+                </div>
+                <!-- <div class="col-md-2"> -->
+                    <!-- <div class="form-group col-md-4">
+                        <strong>Tìm Kiếm </strong><input type="text" class="form-control" placeholder="Enter Keyword for filter result"
+                          [(ngModel)]="searchText">
+                      </div> -->
+                <!-- </div> -->
+                <div class="col-md-3">
+                    <div class="">
+                        <strong>Tìm Kiếm </strong><input type="text" class="form-control" placeholder="Enter Keyword for filter result"
+                        [(ngModel)]="searchText">
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">Mã NV</th>
+                            <th scope="col">Số CMT</th>
+                            <th scope="col">Số Phone</th>
+                            <th scope="col">Giới Tính</th>
+                            <th scope="col">Ngày Sinh</th>
+                            <th scope="col">Quê Quán</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Ngày Vào</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i = index;let item of hosonhanviens | paginate: { itemsPerPage: 10,
+                            currentPage: page,
+                             totalItems:totalLength } | filter:searchText">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{item.hoten}}</td>
+                            <td>{{item.kyhieunv}}</td>
+                            <td>0{{item.cmt}}</td>
+                            <td>0{{item.phone}}</td>
+                            <td *ngIf="item.gioitinh;else unactive">Nam giới</td>
+                        
+                                        <ng-template #unactive>
+                                            <td>Nữ giới</td>
+                                        </ng-template>
+                            <td>{{item.ngaysinh| date:'longDate'}}</td>
+                            <td>{{item.quequan}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.ngaybatdau| date:'longDate'}}</td>
+                            <td>
+                              
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                    data-target="#exampleModal1" (click)="onEdit(item.id)"><i
+                                        class="fa fa-edit"></i></button>
+                            
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            Footer
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!-- /.box -->
+
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm hồ sơ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Ký hiệu nhân viên:</label>
+                <input type="text" class="form-control" [(ngModel)]="kyhieunv" placeholder="nhập kyhieunv">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Số CMT:</label>
+                <input type="text" class="form-control" [(ngModel)]="cmt" placeholder="nhập số chứng minh thư">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Số phone:</label>
+                <input type="text" class="form-control" [(ngModel)]="phone" placeholder="nhập số phone">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Giới tính:</label>
+                <input type="text" class="form-control" [(ngModel)]="gioitinh" placeholder="nhập giới tính">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Ngày sinh:</label>
+                <input type="date" class="form-control" [(ngModel)]="ngaysinh" placeholder="nhập ngày sinh">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Quê quán:</label>
+                <input type="text" class="form-control" [(ngModel)]="quequan" placeholder="nhập quê quán">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Email:</label>
+                <input type="text" class="form-control" [(ngModel)]="email" placeholder="nhập email">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Trình độ học vấn:</label>
+                <input type="text" class="form-control" [(ngModel)]="trinhdohocvan" placeholder="nhập trình độ học vấn">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Ngoại ngữ:</label>
+                <input type="text" class="form-control" [(ngModel)]="ngoaingu" placeholder="nhập ngoại ngữ">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Ngày bắt đầu làm việc:</label>
+                <input type="date" class="form-control" [(ngModel)]="ngaybatdau" placeholder="nhập ngày bắt đầu">
+            </div>
+           
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="add()" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa hồ sơ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Ký hiệu nhân viên:</label>
+                    <input type="text" class="form-control" [(ngModel)]="kyhieunv" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Số CMT:</label>
+                    <input type="text" class="form-control" [(ngModel)]="cmt" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Số phone:</label>
+                    <input type="text" class="form-control" [(ngModel)]="phone" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Giới tính:</label>
+                    <input type="text" class="form-control" [(ngModel)]="gioitinh">
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Ngày sinh:</label>
+                    <input type="date" class="form-control" [(ngModel)]="ngaysinh" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Quê quán:</label>
+                    <input type="text" class="form-control" [(ngModel)]="quequan" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Email:</label>
+                    <input type="text" class="form-control" [(ngModel)]="email" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Trình độ học vấn:</label>
+                    <input type="text" class="form-control" [(ngModel)]="trinhdohocvan" >
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Ngoại ngữ:</label>
+                    <input type="text" class="form-control" [(ngModel)]="ngoaingu">
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputEmail1">Ngày bắt đầu làm việc:</label>
+                    <input type="date" class="form-control" [(ngModel)]="ngaybatdau" >
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

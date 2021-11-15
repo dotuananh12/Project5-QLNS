@@ -1,0 +1,377 @@
+<div class="container">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Thông tin của bạn
+    </h1>
+    <ol class="breadcrumb">
+      <li class="dropdown messages-menu">
+        <a (click)="logout()"><i class="fa fa-sign-out"><span>Đăng xuất</span></i></a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img style="width:100px" class=" img-responsive " src="http://localhost:44880/Photos/{{img}}"
+              style="width:120px;height: 126px;margin-left: 57px;border-radius: 10px; " alt="User profile picture">
+
+            <h3 class="profile-username text-center">{{hovaten}}</h3>
+
+            <p class="text-muted text-center">Mã nhân viên: {{HosoList.kyhieunv}}</p>
+
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>Giới tính </b>
+                <div *ngIf="HosoList.gioitinh;else unactive" class="pull-right" style="color:#008ada">Nam giới</div>
+                <ng-template #unactive>
+                  <div class="pull-right">Nữ giới</div>
+                </ng-template>
+                <!-- <a class="pull-right">{{HosoList.gioitinh}}</a> -->
+              </li>
+              <li class="list-group-item">
+                <b>Số điện thoại</b> <a class="pull-right">0{{HosoList.phone}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Chức vụ</b> <a class="pull-right">{{GetctcvList.tenchucvu}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Phòng </b> <a class="pull-right">{{GetctpbList.ten}}</a>
+              </li>
+            </ul>
+
+            <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+        <!-- About Me Box -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">About Me</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <strong><i class="fa fa-book margin-r-5"></i> Số Chứng Minh Thư</strong>
+            <p class="text-muted"> 0{{HosoList.cmt}}</p>
+            <strong><i class="fa  fa-calendar margin-r-5"></i> Ngày Sinh</strong>
+            <p class="text-muted">{{HosoList.ngaysinh}}</p>
+            <strong><i class="fa fa-map-marker margin-r-5"></i> Quê Quán</strong>
+            <p class="text-muted">{{HosoList.quequan}}</p>
+            <strong><i class="fa fa-envelope-o margin-r-5"></i> Gmail</strong>
+            <p class="text-muted">{{HosoList.email}}</p>
+            <strong><i class="fa fa-map-marker margin-r-5"></i> Trình Độ</strong>
+            <p class="text-muted">{{HosoList.trinhdohocvan}}</p>
+            <strong><i class="fa fa-calendar-o margin-r-5"></i> Ngày Bắt Đầu Làm
+              Việc</strong>
+            <p class="text-muted">{{HosoList.ngaybatdau}}</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#activity" data-toggle="tab">Nhiệm vụ</a></li>
+            <li><a href="#timeline" data-toggle="tab">Phản hồi</a></li>
+            <li><a href="#khoanphu" data-toggle="tab">Khoản phụ</a></li>
+            <li><a href="#settings" data-toggle="tab">Liên hệ</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="active tab-pane" id="activity">
+              <!-- Post -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên công việc</th>
+                    <th scope="col">Ngày giao</th>
+                    <th scope="col">Ngày báo cáo</th>
+                    <th scope="col">Nội dung</th>
+                    <th csope="col">Tiến độ</th>
+                    <!-- <th scope="col">Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i = index;let item of GetList | paginate: { itemsPerPage: 10,
+                    currentPage: page,
+                     totalItems:totalLength } ">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{item.tencongviec}}</td>
+                    <td>{{item.ngaygiao| date:'longDate'}}</td>
+                    <td>{{item.ngaynop| date:'longDate'}}</td>
+                    <td>{{item.noidung}}</td>
+                    <td>
+                      <span *ngIf="item.trangthai;else unactive" class="badge" style="background-color:green;">Đã hoàn
+                        thành</span>
+                      <ng-template #unactive>
+                        <span class="badge" style="background-color:royalblue;">Đang xử lý</span>
+                      </ng-template>
+                    </td>
+                    <!-- <td>
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#exampleModal1" (click)="onEdit(item.id)"><i
+                                    class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" style="margin-left:5px;"(click)="deleteClick(item)"><i
+                                    class="fa fa-trash" ></i></button>
+
+                        </td> -->
+
+                  </tr>
+
+              </table>
+              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              <!-- /.post -->
+
+              <!-- Post -->
+
+              <!-- /.post -->
+
+              <!-- Post -->
+
+              <!-- /.post -->
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="timeline">
+              <!-- The timeline -->
+              <!-- <ul class="timeline timeline-inverse"> -->
+              <!-- timeline time label -->
+              <section class="content">
+
+                <!-- Default box -->
+                <!-- <div class="box"> -->
+                <div class="box-header with-border">
+                  <h3 class="box-title">Phản hồi, ý kiến nhân viên</h3>
+
+
+                </div>
+                <div class="box-body">
+                  <div class="row mb-1">
+                    <div class="col-sm-7">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        data-backdrop="static" data-keyboard="false">
+                        Tạo ý kiến
+                      </button>
+
+                    </div>
+                    <div class="col-md-3">
+                      <div class="">
+                        <strong>Tìm Kiếm </strong><input type="text" class="form-control"
+                          placeholder="Enter Keyword for filter result" [(ngModel)]="searchText">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">STT</th>
+                          <th scope="col">Ngày khiếu nại</th>
+                          <th scope="col">Nội dung</th>
+                          <th scope="col">Hồi đáp</th>
+                          <!-- <th scope="col">Trạng thái</th> -->
+                          <th scope="col">Phê duyệt</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let i = index;let item of khieunais | paginate: { itemsPerPage: 10,
+                          currentPage: page,
+                           totalItems:totalLength }| filter:searchText">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{item.ngaykhieunai| date:'longDate'}}</td>
+                          <td>{{item.noidung}}</td>
+                          <td>
+                            <ng-template [ngIf]="item.hoidap === null">Chưa có hồi đáp!</ng-template>
+                            <ng-template [ngIf]="item.hoidap !== null">{{item.hoidap}}</ng-template>
+                          </td>
+                          <td>
+                            <span>
+                              <ng-template [ngIf]="item.trangthaii === null"><span class="badge"
+                                  style="background-color:orange;">Chờ phê duyệt</span></ng-template>
+                              <ng-template [ngIf]="item.trangthaii === 1"><span class="badge"
+                                  style="background-color:green;">Được duyệt</span></ng-template>
+                              <ng-template [ngIf]="item.trangthaii === 2"><span class="badge"
+                                  style="background-color:red;">Không duyệt</span></ng-template>
+                            </span>
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+                <!-- /.box-body -->
+                <!-- <div class="box-footer">
+                          Footer
+                      </div> -->
+                <!-- /.box-footer-->
+                <!-- </div> -->
+                <!-- /.box -->
+
+              </section>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Soạn phản hồi</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <label for="exampleInputEmail1">Nội dung:</label>
+                      <textarea type="text" class="form-control" [(ngModel)]="noidung"
+                        placeholder="Soạn thư ý kiến"></textarea>
+                    </div>
+
+
+                    <div class="modal-footer">
+                      <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                        class="btn btn-default">Close</button>
+                      <button type="button" (click)="add(id)" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- </ul> -->
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="khoanphu">
+              <div class="box-header with-border">
+                <h3 class="box-title">Bảo hiểm</h3>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên loại bảo hiểm</th>
+                    <th scope="col">Ngày đóng</th>
+                    <th scope="col">Số tiền</th>
+                    <!-- <th scope="col">Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i = index;let item of GetbhList ">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{item.tenbaohiem}}</td>
+                    <td>{{item.ngaytao| date:'longDate'}}</td>
+                    <td style="color: red;">{{item.mucphi|currency : "VND" : true }}</td>
+                  </tr>
+
+              </table>
+              <div style=" position: absolute; right: 0px;  width: 200px;">Tổng số tiền:<a style="color: red;">{{
+                  tongbaohiem|currency : "VND" : true }}</a></div>
+              <!-- /.post -->
+              <br>
+              <div class="box-header with-border">
+                <h3 class="box-title">Trợ cấp</h3>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên trợ cấp</th>
+                    <th scope="col">Ngày cập nhật</th>
+                    <th scope="col">Số tiền</th>
+                    <!-- <th scope="col">Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i = index;let item of GettcList">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{item.ten}}</td>
+                    <td>{{item.ngaytao| date:'longDate'}}</td>
+                    <td style="color: red;">{{item.giatri|currency : "VND" : true }}</td>
+                  </tr>
+                  
+                  <div style="padding: 10px; position: absolute; right: 0px;  width: 200px;">Tổng số tiền:<a style="color: red;">{{
+                    tongtc|currency : "VND" : true }}</a></div>
+              </table>
+
+            </div>
+
+            <div class="tab-pane" id="settings">
+              <form class="form-horizontal">
+                <!-- /////////////////////////////////////// -->
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputName" placeholder="Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+  </section>
+  <!-- /.content -->
+</div>

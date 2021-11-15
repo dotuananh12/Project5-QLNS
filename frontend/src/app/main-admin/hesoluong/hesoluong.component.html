@@ -1,0 +1,122 @@
+<section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h4 class="page-title">Quản hệ số lương</h4>
+                </div>
+
+            </div> <!-- end row -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <!-- <h4 class="mt-0 header-title mb-4">Suppliers</h4> -->
+                            <div class="row mb-1">
+                                <div class="col-sm-7">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                                        Add
+                                    </button>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="">
+                                        <input type="search" id="form1" autocomplete="off" [(ngModel)]="searchText"
+                                            class="form-control" placeholder="&#61442; Tìm kiếm tại đây... " />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Hệ số lương</th>
+                                            <th scope="col">Giá trị</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let i = index;let item of hesoluongs | paginate: { itemsPerPage: 10,
+                                             currentPage: page,
+                                              totalItems:totalLength } | filter:searchText">
+                                            <td>{{ i + 1 }}</td>
+                                            <td>{{item.ten}}</td>
+                                            <td>{{item.giatri | currency:"VND" }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                                    data-target="#exampleModal1" (click)="onEdit(item.id)"><i
+                                                        class="fa fa-edit"></i></button>
+                                                <button type="button" class="btn btn-danger" style="margin-left:5px;"
+                                                    (click)="deleteClick(item)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page-title -->
+    </div>
+    <!-- container-fluid -->
+</div>
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm hệ số</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Tên hệ số lương :</label>
+
+                <input type="text" class="form-control" [(ngModel)]="ten" placeholder="nhập hệ số">
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Giá trị :</label>
+
+                <input type="number" class="form-control" [(ngModel)]="giatri" placeholder="nhap giá trị">
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="add()" class="btn btn-primary">Thêm mới</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa hệ số lương</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="exampleInputEmail1">Tên hệ số:</label>
+                <input type="text" class="form-control" [(ngModel)]="ten">
+                <label for="exampleInputEmail1">Giá trị:</label>
+                <input type="number" class="form-control" [(ngModel)]="giatri">
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeClick()" aria-label="Close" data-dismiss="modal" type="button"
+                    class="btn btn-default">Close</button>
+                <button type="button" (click)="update()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

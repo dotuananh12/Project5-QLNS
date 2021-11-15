@@ -1,0 +1,136 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="./assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>
+              {{hovaten}}
+            </p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Danh sách tác vụ</li>
+
+        <li class="treeview">
+          <a >
+            <i class="fa fa-male"></i> <span>Nhân viên</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/nhanvien"><i class="fa fa-circle-o"></i> Quản lý nhân viên</a></li>
+            <li><a routerLink ="/admin/hosonhanvien"><i class="fa fa-circle-o"></i> Quản lý hồ sơ</a></li>
+          </ul>
+          
+        </li>
+        <li class="treeview">
+          <a >
+            <i class="fa fa-group"></i> <span>Phòng ban</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/phongban"><i class="fa fa-circle-o"></i> Quản lý phòng ban</a></li>
+          </ul>
+        </li>
+       
+        <li class="treeview">
+          <a>
+            <i class="fa fa-sitemap"></i> <span>Chức vụ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/chucvu"><i class="fa fa-circle-o"></i> Quản lý chức vụ</a></li>
+
+          </ul>
+        </li>
+        <li class="treeview">
+          <a >
+            <i class="fa fa-folder-open"></i> <span>Chỉ định công việc</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/congviec"><i class="fa fa-circle-o"></i>Giao công việc</a></li>
+            <li><a routerLink ="/admin/khieunai"><i class="fa fa-circle-o"></i>Ý kiến nhân viên</a></li>
+          </ul>                   
+        </li>
+        <!-- <li class="treeview">
+          <a>
+            <i class="fa fa-edit"></i> <span>Trạng Thái</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink =""><i class="fa fa-circle-o"></i> General Elements</a></li>
+
+          </ul>
+        </li> -->
+        <li class="treeview">
+          <a >
+            <i class="fa fa-money"></i> <span>Phụ phí</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/baohiem"><i class="fa fa-circle-o"></i> Quản lý bảo hiểm</a></li>
+            <li><a routerLink ="/admin/trocap"><i class="fa fa-circle-o"></i> Quản lý trợ cấp</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a >
+            <i class="fa fa-money"></i> <span>Hệ số lương</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/hesoluong"><i class="fa fa-circle-o"></i> Quản lý hệ số lương</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a >
+            <i class="fa fa-folder-o"></i> <span>Trạng thái</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a routerLink ="/admin/trangthai"><i class="fa fa-circle-o"></i> Quản lý trạng thái</a></li>
+          </ul>
+        </li>
+        <!-- <li class="">
+          <a (click)="logout()">
+            <i class="fa fa-money"></i> <span>Đăng xuất</span>
+         
+          </a>
+         
+        </li> -->
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
