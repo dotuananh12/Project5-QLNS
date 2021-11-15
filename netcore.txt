@@ -1,0 +1,10 @@
+
+=============================
+https://amis.misa.vn/amis-nhan-su/?gclid=CjwKCAjw4qCKBhAVEiwAkTYsPFS2Z1y2iFXPyjqKbDi0ydafKHIBE67Oq8HMoawHY_N-LSso0O2dBxoCuj0QAvD_BwE
+
+https://faceworks.vn/chi-tiet/loi-ich-cua-viec-quan-ly-nhan-su-bang-phan-mem/
+--------------------------------------
+kết nối netcore vs csdl
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 5.0.6
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Scaffold-DbContext "Server=.\SQLExpress;Database=HRM;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
